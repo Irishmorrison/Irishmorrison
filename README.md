@@ -51,27 +51,21 @@ Here is my Java soucre code
 import java.util.Scanner;
 
 public class GradeStatistics {
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-        
-        double total = 0;
+        double sum = 0.0;
         double max = Double.NEGATIVE_INFINITY;
         double min = Double.POSITIVE_INFINITY;
-        int numGrades = 10;
-        
-        for (int i = 1; i <= numGrades; i++) {
-            System.out.print("Enter grade " + i + ": ");
-            double grade = scanner.nextDouble();
-            
-            // Check for non-negative grades
-            if (grade < 0) {
-                System.out.println("Grade must be non-negative. Please try again.");
-                i--; // Decrement i to repeat this iteration
-                continue; // Skip to the next iteration
+
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Enter grade " + (i + 1) + ": ");
+            while (!scanner.hasNextDouble()) {
+                System.out.println("Invalid input. Please enter a numeric value.");
+                scanner.next(); // clear the invalid input
             }
-            
-            total += grade;
-            
+            double grade = scanner.nextDouble();
+            sum += grade;
             if (grade > max) {
                 max = grade;
             }
@@ -79,20 +73,16 @@ public class GradeStatistics {
                 min = grade;
             }
         }
-        
-        if (numGrades > 0) {
-            double average = total / numGrades;
-            System.out.println("Average: " + average);
-            System.out.println("Maximum: " + max);
-            System.out.println("Minimum: " + min);
-        } else {
-            System.out.println("No valid grades entered.");
-        }
-        
+
+        double average = sum / 10;
+        System.out.printf("Average: %.2f%n", average);
+        System.out.printf("Maximum: %.2f%n", max);
+        System.out.printf("Minimum: %.2f%n", min);
+
         scanner.close();
     }
 }
-
+       
 
 
 
